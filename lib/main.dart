@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Stream _stream;
   Response response;
 
-  getDogsImages() async {
+  getRandomJokes() async {
     _streamController.add("waiting");
     response = await get(_url);
     _streamController.add(json.decode(response.body));
@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     _streamController = StreamController();
     _stream = _streamController.stream;
-    getDogsImages();
+    getRandomJokes();
   }
 
   @override
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: RefreshIndicator(
           onRefresh: () {
-            return getDogsImages();
+            return getRandomJokes();
           },
           child: Center(
             child: StreamBuilder(
@@ -112,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.refresh),
         onPressed:(){
-          getDogsImages();
+          getRandomJokes();
     },),
     );
   }
